@@ -18,8 +18,18 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
+        <ThemedText type="title">Welcome!{"\n"}Ini Test Edit Kel. 9</ThemedText>
         <HelloWave />
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Step 0: Berhasil Edit!</ThemedText>
+        <ThemedText>
+          Kelompok 9 (Android){"\n"}
+          1.  Arif Budi Prasetio{"\n"}
+          2.  Lisa Humairoh{"\n"}
+          3.  Muhammad Labib Royhan Hadi{"\n"}
+          4.  Yuri Iskandia Barru
+        </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
