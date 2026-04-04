@@ -32,6 +32,14 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Cek Profile Kelompok</ThemedText>
+          <Link href="/profiles">
+            <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+              Lihat Daftar Profile -&gt;
+            </ThemedText>
+            </Link>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.

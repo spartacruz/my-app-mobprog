@@ -1,0 +1,34 @@
+{
+  "user_arif": {
+    "name": "Arif Budi Prasetio",
+    "role": "Android Developer",
+    "imageId": "gambar_arif",
+    "description": "Fokus pada pengembangan antarmuka dan integrasi API untuk aplikasi Android.",
+    "hobbies": ["Coding", "Gaming"],
+    "youtubeVideoId": "dQw4w9WgXcQ"
+  },
+  "user_lisa": {
+    "name": "Lisa Humairoh",
+    "role": "UI/UX & Frontend",
+    "imageId": "gambar_lisa",
+    "description": "Mahasiswa semester 6 yang suka mengeksplorasi desain antarmuka dan arsitektur aplikasi. Tertarik juga dengan fotografi analog.",
+    "hobbies": ["Photography (Fuji & Premier PC-480)", "Reading", "Web Programming"],
+    "youtubeVideoId": "VideoID_Lisa"
+  },
+  "user_labib": {
+    "name": "M. Labib Royhan Hadi",
+    "role": "Backend & Database",
+    "imageId": "gambar_labib",
+    "description": "Bertanggung jawab dalam merancang struktur database dan memastikan backend berjalan lancar.",
+    "hobbies": ["Music", "Badminton"],
+    "youtubeVideoId": "VideoID_Labib"
+  },
+  "user_yuri": {
+    "name": "Yuri Iskandia Barru",
+    "role": "System Analyst",
+    "imageId": "gambar_yuri",
+    "description": "Menganalisis kebutuhan sistem dan memastikan alur aplikasi sesuai dengan tujuan project.",
+    "hobbies": ["Traveling", "Movies"],
+    "youtubeVideoId": "VideoID_Yuri"
+  }
+}
