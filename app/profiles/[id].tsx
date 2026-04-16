@@ -5,10 +5,10 @@ import { useLocalSearchParams } from 'expo-router';
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-const blackImg = require('@/assets/images/blackImg.png');
-const orangeImg = require('@/assets/images/orangeImg.png');
-const yellowImg = require('@/assets/images/yellowImg.png');
-const greyImg = require('@/assets/images/greyImg.png');
+const blackImg = require('@/assets/images/black.jpg');
+const orangeImg = require('@/assets/images/orange.jpg');
+const yellowImg = require('@/assets/images/yellow.jpg');
+const greyImg = require('@/assets/images/grey.jpg');
 
 // 2. PERBARUI DATA DENGAN YOUTUBE VIDEO ID
 const DETAIL_DATA: Record<string, any> = {
@@ -26,7 +26,7 @@ const DETAIL_DATA: Record<string, any> = {
     image: orangeImg,
     description: "Mahasiswa semester 6 yang suka mengeksplorasi desain antarmuka dan arsitektur aplikasi. Tertarik juga dengan fotografi analog.",
     hobbies: ["Photography", "Reading"],
-    youtubeVideoId: "si=X49tqkiELYD9-AXm" // https://youtu.be/8Gqnohf1HQ8?si=X49tqkiELYD9-AXm
+    youtubeVideoId: "8Gqnohf1HQ8" // https://youtu.be/8Gqnohf1HQ8?si=X49tqkiELYD9-AXm
   },
   "user_labib": {
     name: "M. Labib Royhan Hadi",
@@ -34,7 +34,7 @@ const DETAIL_DATA: Record<string, any> = {
     image: yellowImg,
     description: "Bertanggung jawab dalam merancang struktur database dan memastikan backend berjalan lancar.",
     hobbies: ["Music", "Badminton"],
-    youtubeVideoId: "si=Xjpfy5boaSnFcmRp" // Ganti dengan ID video asli
+    youtubeVideoId: "" // Ganti dengan ID video asli
   },
   "user_yuri": {
     name: "Yuri Iskandia Barru",
@@ -42,7 +42,7 @@ const DETAIL_DATA: Record<string, any> = {
     image: greyImg,
     description: "Menganalisis kebutuhan sistem dan memastikan alur aplikasi sesuai dengan tujuan project.",
     hobbies: ["Traveling", "Movies"],
-    youtubeVideoId: "VideoID_Yuri" // Ganti dengan ID video asli
+    youtubeVideoId: "" // Ganti dengan ID video asli
   }
 };
 

@@ -40,6 +40,14 @@ export default function HomeScreen() {
             </Link>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Kalkulator Bangun Ruang</ThemedText>
+          <Link href="/hitung">
+            <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+              Buka Kalkulator -&gt;
+            </ThemedText>
+            </Link>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
         <ThemedText>
           Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
