@@ -18,11 +18,11 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!{"\n"}Ini Test Edit Kel. 9</ThemedText>
+        <ThemedText type="title">Welcome!{"\n"}Mobile App Kel. 9</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 0: Berhasil Edit!</ThemedText>
+        <ThemedText type="subtitle">Minggu 1: Instalasi</ThemedText>
         <ThemedText>
           Kelompok 9 (Android){"\n"}
           1.  Arif Budi Prasetio{"\n"}
@@ -32,20 +32,20 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Cek Profile Kelompok</ThemedText>
-          <Link href="/profiles">
-            <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
-              Lihat Daftar Profile -&gt;
-            </ThemedText>
-            </Link>
+        <ThemedText type="subtitle">Minggu 2: Profile Kelompok</ThemedText>
+        <Link href="/profiles">
+          <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+            Lihat Daftar Profile -&gt;
+          </ThemedText>
+        </Link>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Kalkulator Bangun Ruang</ThemedText>
-          <Link href="/hitung">
-            <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
-              Buka Kalkulator -&gt;
-            </ThemedText>
-            </Link>
+        <ThemedText type="subtitle">Minggu 3: Kalkulator Bangun Ruang</ThemedText>
+        <Link href="/hitung">
+          <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+            Buka Kalkulator -&gt;
+          </ThemedText>
+        </Link>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 1: Try it</ThemedText>
