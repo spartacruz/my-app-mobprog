@@ -18,7 +18,7 @@ const DETAIL_DATA: Record<string, any> = {
     image: blackImg,
     description: "Fokus pada pengembangan antarmuka dan integrasi API untuk aplikasi Android.",
     hobbies: ["Coding", "Gaming"],
-    youtubeVideoId: "dQw4w9WgXcQ" 
+    youtubeVideoId: "dQw4w9WgXcQ"
   },
   "user_lisa": {
     name: "Lisa Humairoh",
@@ -49,10 +49,10 @@ const DETAIL_DATA: Record<string, any> = {
 // Ambil lebar layar untuk mengatur ukuran video agar pas
 const { width: screenWidth } = Dimensions.get('window');
 // Hitung tinggi video berdasarkan rasio 16:9 agar tidak terpotong
-const videoHeight = (screenWidth - 48) * (9 / 16); 
+const videoHeight = (screenWidth - 48) * (9 / 16);
 
 export default function ProfileDetailScreen() {
-  const { id } = useLocalSearchParams(); 
+  const { id } = useLocalSearchParams();
   const user = DETAIL_DATA[id as string];
 
   if (!user) {
@@ -69,10 +69,10 @@ export default function ProfileDetailScreen() {
         <View style={styles.imageWrapper}>
           <Image source={user.image} style={styles.image} contentFit="contain" />
         </View>
-        
+
         <ThemedText type="title" style={styles.name}>{user.name}</ThemedText>
         <ThemedText type="subtitle" style={styles.role}>{user.role}</ThemedText>
-        
+
         <ThemedView style={styles.section}>
           <ThemedText type="defaultSemiBold">Tentang:</ThemedText>
           <ThemedText style={styles.paragraph}>{user.description}</ThemedText>
@@ -133,13 +133,13 @@ const styles = StyleSheet.create({
   section: { width: '100%', marginBottom: 20, backgroundColor: 'rgba(150, 150, 150, 0.05)', padding: 16, borderRadius: 12 },
   paragraph: { marginTop: 8, lineHeight: 24 },
   bulletPoint: { marginTop: 4, marginLeft: 8 },
-  
+
   // -- Styles untuk Video --
   videoContainer: {
     width: '100%',
     borderRadius: 12,
-    overflow: 'hidden', // Biar sudut video ikut tumpul
-    backgroundColor: '#000', // Warna background saat loading
+    overflow: 'hidden',
+    backgroundColor: '#000',
   },
   video: {
     flex: 1,

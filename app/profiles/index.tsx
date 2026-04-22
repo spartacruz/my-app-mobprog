@@ -1,7 +1,7 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Image } from 'expo-image';
-import { Link } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 
 const blackImg = require('@/assets/images/black.jpg');
@@ -20,20 +20,21 @@ const PROFILES_DATA = [
 export default function ProfilesGridScreen() {
   return (
     <ThemedView style={styles.container}>
+      <Stack.Screen options={{ title: 'Profile' }} />
       <ThemedText type="title" style={styles.header}>Kelompok 9</ThemedText>
-      
+
       <FlatList
         data={PROFILES_DATA}
         keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={styles.listContainer}
         renderItem={({ item }) => (
-          
-          <Link 
+
+          <Link
             href={{
               pathname: "/profiles/[id]" as any,
               params: { id: item.id }
-            }} 
+            }}
             asChild
           >
             <Pressable style={styles.card}>
@@ -55,9 +56,9 @@ const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   header: { marginBottom: 24, textAlign: 'center' },
   listContainer: { paddingBottom: 20 },
-  card: { 
-    flex: 1, 
-    margin: 8, 
+  card: {
+    flex: 1,
+    margin: 8,
     alignItems: 'center',
     backgroundColor: 'rgba(150, 150, 150, 0.1)',
     padding: 16,

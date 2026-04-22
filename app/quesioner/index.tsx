@@ -1,0 +1,70 @@
+import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import { Image } from 'expo-image';
+import { Link, Stack } from 'expo-router';
+import { FlatList, Pressable, StyleSheet, View } from 'react-native';
+
+
+const quizImg = require('@/assets/images/quiz.png');
+const poolImg = require('@/assets/images/pool.png');
+
+const MENU_DATA = [
+    { id: "quesioner", name: "Quesioner", route: "/quesioner/quesioner", image: quizImg },
+    { id: "pooling", name: "Pooling", route: "/quesioner/pooling", image: poolImg },
+];
+
+export default function QuesionerMenuScreen() {
+    return (
+        <ThemedView style={styles.container}>
+            <Stack.Screen options={{ title: 'Quesioner & Pooling' }} />
+            <FlatList
+                data={MENU_DATA}
+                keyExtractor={(item) => item.id}
+                numColumns={2}
+                contentContainerStyle={styles.listContainer}
+                renderItem={({ item }) => (
+
+                    <Link
+                        href={item.route as any}
+                        asChild
+                    >
+                        <Pressable style={styles.card}>
+                            <View style={styles.imageContainer}>
+                                <Image source={item.image} style={styles.image} contentFit="contain" />
+                            </View>
+                            <ThemedText type="defaultSemiBold" style={styles.nameText}>
+                                {item.name}
+                            </ThemedText>
+                        </Pressable>
+                    </Link>
+                )}
+            />
+        </ThemedView>
+    );
+}
+
+const styles = StyleSheet.create({
+    container: { flex: 1, padding: 16 },
+    header: { marginBottom: 24, textAlign: 'center' },
+    listContainer: { paddingBottom: 20 },
+    card: {
+        flex: 1,
+        margin: 8,
+        alignItems: 'center',
+        backgroundColor: 'rgba(150, 150, 150, 0.1)',
+        padding: 16,
+        borderRadius: 12,
+    },
+    imageContainer: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        overflow: 'hidden',
+        backgroundColor: '#fff',
+        marginBottom: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: { width: 80, height: 80 },
+    nameText: { textAlign: 'center' }
+});
