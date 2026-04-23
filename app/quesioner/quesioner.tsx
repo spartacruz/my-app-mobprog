@@ -6,8 +6,8 @@ import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 type MenuItem = { id: string; name: string; route: Href };
 
 const MENU_DATA = [
-  { id: 'single', name: 'Single Choice Question', route: './single-que' },
-  { id: 'multiple', name: 'Multiple Choice Question', route: './multiple-que' },
+  { id: 'single', name: 'Pertanyaan Satu Pilihan (Single Choice)', route: './single-que' },
+  { id: 'multiple', name: 'Pertanyaan Pilihan Ganda (Multiple Choices)', route: './multiple-que' },
 ] satisfies MenuItem[];
 
 export default function QuesionerScreen() {

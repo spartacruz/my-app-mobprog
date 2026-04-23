@@ -14,41 +14,63 @@ type MultiChoiceQuestion = {
 const multiChoiceQuestions: MultiChoiceQuestion[] = [
   {
     id: 'mc1',
-    question: 'Pilih komponen yang ada di proyek ini.',
-    options: ['ThemedView', 'ParallaxScrollView', 'FancyCard', 'HelloWave', 'MagicTile'],
-    correctIndices: [0, 1, 3],
+    question: 'Pilih provinsi yang berada di Pulau Jawa.',
+    options: ['Jawa Barat', 'Kalimantan Selatan', 'Jawa Tengah', 'Bali', 'Jawa Timur'],
+    correctIndices: [0, 2, 4],
   },
   {
     id: 'mc2',
-    question: 'Bagian fitur apa saja yang ada di aplikasi?',
-    options: ['Profile', 'Kalkulator', 'Chatting', 'Quesioner', 'Music Player'],
-    correctIndices: [0, 1, 3],
+    question: 'Pilih makanan khas Indonesia.',
+    options: ['Rendang', 'Sushi', 'Sate', 'Pizza', 'Gado-gado'],
+    correctIndices: [0, 1, 4],
   },
   {
     id: 'mc3',
-    question: 'File yang termasuk folder app/ adalah?',
-    options: ['_layout.tsx', 'index.tsx', 'theme.ts', 'modal.tsx', 'README.md'],
+    question: 'Pilih pahlawan nasional Indonesia.',
+    options: ['R.A. Kartini', 'Soekarno', 'Mahathir Mohamad', 'Cut Nyak Dien', 'Lee Kuan Yew'],
     correctIndices: [0, 1, 3],
   },
 ];
 
 export default function MultipleChoiceScreen() {
-  const [selectedMulti, setSelectedMulti] = useState<Record<string, number | null>>({});
+  const [selectedMulti, setSelectedMulti] = useState<Record<string, number[]>>({});
+  const [validatedQuestions, setValidatedQuestions] = useState<Record<string, boolean>>({});
 
-  const handleMultiSelect = (questionId: string, optionIndex: number) => {
-    setSelectedMulti((prev) => ({ ...prev, [questionId]: optionIndex }));
+  const handleMultiSelect = (
+    questionId: string,
+    optionIndex: number,
+    correctCount: number
+  ) => {
+    setSelectedMulti((prev) => {
+      const currentSelections = prev[questionId] ?? [];
+      const isAlreadySelected = currentSelections.includes(optionIndex);
+      const nextSelections = isAlreadySelected
+        ? currentSelections.filter((index) => index !== optionIndex)
+        : [...currentSelections, optionIndex];
+      const shouldValidate = nextSelections.length >= correctCount;
+
+      setValidatedQuestions((prevValidated) => ({
+        ...prevValidated,
+        [questionId]: shouldValidate,
+      }));
+
+      return { ...prev, [questionId]: nextSelections };
+    });
   };
 
   return (
     <ThemedView style={styles.container}>
-      <Stack.Screen options={{ title: 'Multiple Choice' }} />
+      <Stack.Screen options={{ title: 'Pilihan Ganda (Multiple Choices)' }} />
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <ThemedText type="title" style={styles.header}>Multiple Choice Question</ThemedText>
+        <ThemedText type="title" style={styles.header}>Pertanyaan Pilihan Ganda</ThemedText>
 
         {multiChoiceQuestions.map((question) => {
-          const selectedIndex = selectedMulti[question.id];
-          const isAnswered = selectedIndex !== null && selectedIndex !== undefined;
-          const isCorrect = isAnswered && question.correctIndices.includes(selectedIndex);
+          const selectedIndices = selectedMulti[question.id] ?? [];
+          const isValidated = validatedQuestions[question.id] === true;
+          const isCorrect =
+            isValidated &&
+            selectedIndices.length === question.correctIndices.length &&
+            selectedIndices.every((index) => question.correctIndices.includes(index));
           const correctAnswers = question.correctIndices
             .map((index) => question.options[index])
             .join(', ');
@@ -59,26 +81,38 @@ export default function MultipleChoiceScreen() {
                 {question.question}
               </ThemedText>
 
-              {question.options.map((option, index) => (
-                <Pressable
-                  key={`${question.id}-${index}`}
-                  onPress={() => handleMultiSelect(question.id, index)}
-                  style={({ pressed }) => [
-                    styles.optionButton,
-                    selectedIndex === index && styles.optionSelected,
-                    pressed && styles.optionPressed,
-                  ]}
-                >
-                  <ThemedText style={styles.optionText}>{option}</ThemedText>
-                </Pressable>
-              ))}
+              {question.options.map((option, index) => {
+                const isSelected = selectedIndices.includes(index);
 
-              {isAnswered && (
+                return (
+                  <Pressable
+                    key={`${question.id}-${index}`}
+                    onPress={() =>
+                      handleMultiSelect(question.id, index, question.correctIndices.length)
+                    }
+                    style={({ pressed }) => [
+                      styles.optionButton,
+                      styles.optionRow,
+                      isSelected && styles.optionSelected,
+                      pressed && styles.optionPressed,
+                    ]}
+                  >
+                    <View style={[styles.checkbox, isSelected && styles.checkboxChecked]}>
+                      {isSelected ? (
+                        <ThemedText style={styles.checkmark}>v</ThemedText>
+                      ) : null}
+                    </View>
+                    <ThemedText style={styles.optionText}>{option}</ThemedText>
+                  </Pressable>
+                );
+              })}
+
+              {isValidated && (
                 isCorrect ? (
-                  <ThemedText style={[styles.feedbackText, styles.correctText]}>Correct</ThemedText>
+                  <ThemedText style={[styles.feedbackText, styles.correctText]}>Kamu Benar!</ThemedText>
                 ) : (
                   <ThemedText style={[styles.feedbackText, styles.incorrectText]}>
-                    Incorrect. Correct answers: {correctAnswers}
+                    Salah! Jawaban Yang Benar: {correctAnswers}
                   </ThemedText>
                 )
               )}
@@ -108,6 +142,28 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.15)',
     marginBottom: 8,
+  },
+  optionRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  checkbox: {
+    width: 18,
+    height: 18,
+    borderRadius: 4,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.35)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 10,
+  },
+  checkboxChecked: {
+    borderColor: '#0a7ea4',
+    backgroundColor: 'rgba(10, 126, 164, 0.18)',
+  },
+  checkmark: {
+    fontSize: 12,
+    color: '#0a7ea4',
   },
   optionSelected: {
     borderColor: '#0a7ea4',

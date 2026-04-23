@@ -41,9 +41,9 @@ export default function SingleChoiceScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <Stack.Screen options={{ title: 'Single Choice' }} />
+      <Stack.Screen options={{ title: 'Satu Pilihan (Single Choice)' }} />
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        <ThemedText type="title" style={styles.header}>Single Choice Question</ThemedText>
+        <ThemedText type="title" style={styles.header}>Pertanyaan Satu Pilihan</ThemedText>
 
         {singleChoiceQuestions.map((question) => {
           const selectedIndex = selectedSingle[question.id];
