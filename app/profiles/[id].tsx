@@ -3,7 +3,7 @@ import { ThemedView } from '@/components/themed-view';
 import { Image } from 'expo-image';
 import { useLocalSearchParams } from 'expo-router';
 import { Dimensions, ScrollView, StyleSheet, View } from 'react-native';
-import { WebView } from 'react-native-webview';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 const blackImg = require('@/assets/images/black.jpg');
 const orangeImg = require('@/assets/images/orange.jpg');
@@ -42,7 +42,7 @@ const DETAIL_DATA: Record<string, any> = {
     image: greyImg,
     description: "Menganalisis kebutuhan sistem dan memastikan alur aplikasi sesuai dengan tujuan project.",
     hobbies: ["Traveling", "Movies"],
-    youtubeVideoId: "" // Ganti dengan ID video asli
+    youtubeVideoId: "gsbBhTS2AV0"
   }
 };
 
@@ -54,6 +54,7 @@ const videoHeight = (screenWidth - 48) * (9 / 16);
 export default function ProfileDetailScreen() {
   const { id } = useLocalSearchParams();
   const user = DETAIL_DATA[id as string];
+
 
   if (!user) {
     return (
@@ -92,12 +93,11 @@ export default function ProfileDetailScreen() {
           </ThemedText>
           {user.youtubeVideoId ? (
             <View style={[styles.videoContainer, { height: videoHeight }]}>
-              <WebView
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                // Pastikan menggunakan URL /embed/ID
-                source={{ uri: `https://www.youtube.com/embed/${user.youtubeVideoId}` }}
-                style={styles.video}
+              <YoutubePlayer
+                height={videoHeight}
+                play={false}
+                videoId={user.youtubeVideoId}
+                webViewProps={{ allowsInlineMediaPlayback: true }}
               />
             </View>
           ) : (
