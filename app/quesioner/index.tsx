@@ -1,16 +1,16 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Image } from 'expo-image';
-import { Link, Stack } from 'expo-router';
+import { type Href, Link, Stack } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, View } from 'react-native';
 
 
 const quizImg = require('@/assets/images/quiz.png');
 const poolImg = require('@/assets/images/pool.png');
 
-const MENU_DATA = [
-    { id: "quesioner", name: "Quesioner", route: "/quesioner/quesioner", image: quizImg },
-    { id: "pooling", name: "Pooling", route: "/quesioner/pooling", image: poolImg },
+const MENU_DATA: Array<{ id: string; name: string; route: Href; image: number }> = [
+    { id: "quesioner", name: "Quesioner", route: { pathname: "/quesioner/quesioner" }, image: quizImg },
+    { id: "pooling", name: "Pooling", route: { pathname: "/quesioner/pooling" }, image: poolImg },
 ];
 
 export default function QuesionerMenuScreen() {
@@ -24,10 +24,7 @@ export default function QuesionerMenuScreen() {
                 contentContainerStyle={styles.listContainer}
                 renderItem={({ item }) => (
 
-                    <Link
-                        href={item.route as any}
-                        asChild
-                    >
+                    <Link href={item.route} asChild>
                         <Pressable style={styles.card}>
                             <View style={styles.imageContainer}>
                                 <Image source={item.image} style={styles.image} contentFit="contain" />
