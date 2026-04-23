@@ -10,13 +10,13 @@ const poolImg = require('@/assets/images/pool.png');
 
 const MENU_DATA: Array<{ id: string; name: string; route: Href; image: number }> = [
     { id: "quesioner", name: "Quesioner", route: { pathname: "/quesioner/quesioner" }, image: quizImg },
-    { id: "pooling", name: "Pooling", route: { pathname: "/quesioner/pooling" }, image: poolImg },
+    { id: "polling", name: "Polling", route: { pathname: "/quesioner/polling" }, image: poolImg },
 ];
 
 export default function QuesionerMenuScreen() {
     return (
         <ThemedView style={styles.container}>
-            <Stack.Screen options={{ title: 'Quesioner & Pooling' }} />
+            <Stack.Screen options={{ title: 'Quesioner & Polling' }} />
             <FlatList
                 data={MENU_DATA}
                 keyExtractor={(item) => item.id}
