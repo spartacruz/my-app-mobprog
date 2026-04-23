@@ -14,21 +14,21 @@ type SingleChoiceQuestion = {
 const singleChoiceQuestions: SingleChoiceQuestion[] = [
   {
     id: 'sc1',
-    question: 'Bahasa pemrograman utama untuk React Native adalah?',
-    options: ['Kotlin', 'Swift', 'JavaScript', 'Go', 'Ruby'],
-    correctIndex: 2,
+    question: 'Ibu kota Indonesia adalah?',
+    options: ['Konoha', 'DKI Jakarta', 'IKN', 'Beijing', 'Bangkok'],
+    correctIndex: 1,
   },
   {
     id: 'sc2',
-    question: 'Routing yang dipakai di proyek ini adalah?',
-    options: ['React Navigation', 'Expo Router', 'Next Router', 'Vue Router', 'Wouter'],
-    correctIndex: 1,
+    question: 'Ibu kota Prancis adalah?',
+    options: ['Paris', 'Roma', 'Berlin', 'Madrid', 'Lisbon'],
+    correctIndex: 0,
   },
   {
     id: 'sc3',
-    question: 'Komponen yang digunakan untuk teks bertema adalah?',
-    options: ['TextBase', 'ThemedText', 'StyledText', 'ThemeLabel', 'AppText'],
-    correctIndex: 1,
+    question: 'Ibu kota Australia adalah?',
+    options: ['Sydney', 'Melbourne', 'Canberra', 'Perth', 'Brisbane'],
+    correctIndex: 2,
   },
 ];
 
