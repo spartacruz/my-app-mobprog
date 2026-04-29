@@ -48,11 +48,20 @@ export default function HomeScreen() {
         </Link>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Minggu 4: Quesioner & Polling</ThemedText>
+        <ThemedText type="subtitle">Minggu 4: Quesioner & Pooling</ThemedText>
         {/* @ts-ignore */}
         <Link href={"/quesioner" as any}>
           <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
-            Buka Quesioner & Polling -&gt;
+            Buka Quesioner & Pooling -&gt;
+          </ThemedText>
+        </Link>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Minggu 5: Percabangan</ThemedText>
+        {/* @ts-ignore */}
+        <Link href={"/conditional" as any}>
+          <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+            Buka Fitur Percabangan -&gt;
           </ThemedText>
         </Link>
       </ThemedView>
