@@ -8,12 +8,10 @@ const calcImg = require('@/assets/images/calculation.png');
 
 
 const MENU_DATA: Array<{ id: string; name: string; route: Href; image: number }> = [
-    { id: "maxmin", name: "Max & Min", route: { pathname: "/conditional/maxmin" }, image: calcImg },
-    // Penggunaan Nested IF
-    // Penggunaan Switch-Case
-    // Penggunaan diskon menggunakan Switch-case
-
-
+    { id: "maxmin",      name: "Max & Min",       route: { pathname: "/conditional/maxmin" },      image: calcImg },
+    { id: "nested-if",  name: "Nested IF",        route: { pathname: "/conditional/nested-if" },  image: calcImg },
+    { id: "switch-case",name: "Switch-Case",      route: { pathname: "/conditional/switch-case" },image: calcImg },
+    { id: "diskon",     name: "Diskon Member",    route: { pathname: "/conditional/diskon" },      image: calcImg },
 ];
 
 export default function ConditionalMenuScreen() {
