@@ -65,6 +65,15 @@ export default function HomeScreen() {
           </ThemedText>
         </Link>
       </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Minggu 6: Perulangan (Loop)</ThemedText>
+        {/* @ts-ignore */}
+        <Link href={"/loop" as any}>
+          <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+            Buka Fitur Perulangan -&gt;
+          </ThemedText>
+        </Link>
+      </ThemedView>
 
     </ParallaxScrollView>
   );
