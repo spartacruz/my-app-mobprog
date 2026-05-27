@@ -31,7 +31,7 @@ export default function LoopScreen() {
     countFibo++;
   } while (countFibo < 20);
 
-  // 4. Hitung 20 Bilangan Prima (Hanya FOR)
+  // 4. Hitung 20 Bilangan Prima (FOR)
   const bilanganPrima = [];
   for (let numPrima = 2; bilanganPrima.length < 20; numPrima++) {
     let isPrime = true;
