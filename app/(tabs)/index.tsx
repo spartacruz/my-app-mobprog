@@ -66,11 +66,26 @@ export default function HomeScreen() {
         </Link>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Minggu 6: Perulangan (Loop)</ThemedText>
+        <ThemedText type="subtitle">Minggu 6: UTS</ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Minggu 7: Latihan Algoritma Pencabangan (Elearning)</ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Minggu 8: Perulangan (Loop)</ThemedText>
         {/* @ts-ignore */}
         <Link href={"/loop" as any}>
           <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
             Buka Fitur Perulangan -&gt;
+          </ThemedText>
+        </Link>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Minggu 9: Sorting</ThemedText>
+        {/* @ts-ignore */}
+        <Link href={"/sorting" as any}>
+          <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+            Buka Fitur Sorting -&gt;
           </ThemedText>
         </Link>
       </ThemedView>
