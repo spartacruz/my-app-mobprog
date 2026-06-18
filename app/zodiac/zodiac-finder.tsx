@@ -1,6 +1,6 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { findZodiacByDate, ZodiacRecord } from '@/lib/zodiac-controller';
+import { findZodiacByDate, ZodiacRecord } from '@/lib/zodiac-repository';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import { useState } from 'react';

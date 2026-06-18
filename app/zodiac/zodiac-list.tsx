@@ -1,10 +1,10 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { getAllZodiacs, ZodiacRecord } from '@/lib/zodiac-controller';
+import { getAllZodiacs, ZodiacRecord } from '@/lib/zodiac-repository';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, View, ActivityIndicator } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 
 export default function ZodiacListScreen() {
     const [zodiacs, setZodiacs] = useState<ZodiacRecord[]>([]);
@@ -52,7 +52,7 @@ export default function ZodiacListScreen() {
     return (
         <ThemedView style={styles.root}>
             <Stack.Screen options={{ title: 'Daftar Zodiac' }} />
-            
+
             {loading ? (
                 <View style={styles.centerContainer}>
                     <ActivityIndicator size="large" color="#0a7ea4" />
@@ -114,26 +114,26 @@ const styles = StyleSheet.create({
         padding: 16,
         gap: 16,
     },
-    zodiacImage: { 
-        width: 70, 
-        height: 70, 
-        borderRadius: 35 
+    zodiacImage: {
+        width: 70,
+        height: 70,
+        borderRadius: 35
     },
-    cardInfo: { 
-        flex: 1 
+    cardInfo: {
+        flex: 1
     },
-    symbolText: { 
-        fontSize: 24, 
-        color: 'rgba(255,255,255,0.85)', 
-        lineHeight: 30 
+    symbolText: {
+        fontSize: 24,
+        color: 'rgba(255,255,255,0.85)',
+        lineHeight: 30
     },
-    zodiacName: { 
-        fontSize: 22, 
-        fontWeight: 'bold', 
-        lineHeight: 28 
+    zodiacName: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        lineHeight: 28
     },
-    dateRange: { 
-        marginTop: 4, 
-        fontSize: 13 
+    dateRange: {
+        marginTop: 4,
+        fontSize: 13
     },
 });
