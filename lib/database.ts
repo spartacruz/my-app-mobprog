@@ -29,8 +29,8 @@ export const zodiacImages: Record<string, any> = {
 // PENTING: openDatabaseSync TIDAK boleh dipanggil di module level pada web,
 // karena WASM engine belum siap saat module di-import pertama kali.
 // Gunakan lazy initialization — db dibuat hanya sekali saat initDatabase() dipanggil.
-let _db: ExpoSQLiteDatabase | null = null;
-let _expoDb: ReturnType<typeof openDatabaseSync> | null = null;
+let _db: ExpoSQLiteDatabase | null = (globalThis as any)._db || null;
+let _expoDb: ReturnType<typeof openDatabaseSync> | null = (globalThis as any)._expoDb || null;
 
 export function getDb(): ExpoSQLiteDatabase {
   if (!_db) {
@@ -181,9 +181,9 @@ export async function initDatabase(): Promise<void> {
   if (!_expoDb) {
     _expoDb = await openDatabaseAsync('zodiac.db');
     _db = drizzle(_expoDb);
+    (globalThis as any)._expoDb = _expoDb;
+    (globalThis as any)._db = _db;
   }
-
-  const db = _db!;
 
   // Buat tabel menggunakan raw SQL (tanpa drizzle-kit push)
   await _expoDb.execAsync(`
@@ -207,16 +207,25 @@ export async function initDatabase(): Promise<void> {
     );
   `);
 
-  // Cek apakah tabel sudah ada datanya
-  const result = db.select({ jumlah: count() }).from(zodiak).get();
+  // Cek apakah tabel sudah ada datanya menggunakan raw query async agar tidak error di Web
+  const result = await _expoDb.getFirstAsync<{ jumlah: number }>('SELECT COUNT(*) as jumlah FROM zodiak');
   if (result && result.jumlah > 0) {
     return; // Data sudah ada, skip seeding
   }
 
-  // Seed semua 12 zodiak
+  // Seed semua 12 zodiak menggunakan execAsync agar lebih aman di web
+  // Untuk insert satu-satu, lebih baik gunakan runAsync
   for (const data of seedData) {
-    db.insert(zodiak).values(data).run();
+    await _expoDb.runAsync(
+      `INSERT INTO zodiak (nama_zodiak, simbol, elemen, tanggal_mulai, tanggal_selesai, bulan_mulai, hari_mulai, bulan_selesai, hari_selesai, warna, deskripsi_karier, deskripsi_keuangan, deskripsi_asmara, deskripsi_kesehatan, gambar_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        data.nama_zodiak, data.simbol, data.elemen, data.tanggal_mulai, data.tanggal_selesai,
+        data.bulan_mulai, data.hari_mulai, data.bulan_selesai, data.hari_selesai,
+        data.warna, data.deskripsi_karier, data.deskripsi_keuangan, data.deskripsi_asmara, data.deskripsi_kesehatan, data.gambar_key
+      ]
+    );
   }
 
   console.log('✅ Database zodiak berhasil di-seed dengan 12 record.');
 }
+
