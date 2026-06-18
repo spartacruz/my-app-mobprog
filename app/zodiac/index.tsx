@@ -1,6 +1,6 @@
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { findZodiacByDate, ZodiacRecord } from '@/lib/zodiac-db';
+import { findZodiacByDate, ZodiacRecord } from '@/lib/zodiac-controller';
 import { Image } from 'expo-image';
 import { Stack } from 'expo-router';
 import { useState } from 'react';
@@ -75,7 +75,7 @@ function PickerRow({
 export default function ZodiacScreen() {
   const today = new Date();
   const [selectedBulan, setSelectedBulan] = useState(today.getMonth()); // 0-based
-  const [selectedHari, setSelectedHari]   = useState(today.getDate());   // 1-based
+  const [selectedHari, setSelectedHari] = useState(today.getDate());   // 1-based
 
   const [hasil, setHasil] = useState<ZodiacRecord | null | undefined>(undefined);
 
@@ -99,12 +99,12 @@ export default function ZodiacScreen() {
     });
   };
 
-  const cariZodiak = () => {
-    // Drift: query ke database zodiak berdasarkan bulan & hari
+  const cariZodiak = async () => {
+    // query ke database zodiak secara async (menghindari limitasi web)
     const bulan = selectedBulan + 1; // konversi ke 1-based
-    const hari  = selectedHari;
-    const record = findZodiacByDate(bulan, hari);
-    setHasil(record ?? null);
+    const hari = selectedHari;
+    const record = await findZodiacByDate(bulan, hari);
+    setHasil(record);
   };
 
   return (
@@ -206,9 +206,9 @@ export default function ZodiacScreen() {
               <ThemedText type="defaultSemiBold" style={styles.descTitle}>
                 Ramalan Zodiak
               </ThemedText>
-              <InfoCard icon="💼" judul="Karier"    isi={hasil.deskripsi_karier}    warna={hasil.warna} />
-              <InfoCard icon="💰" judul="Keuangan"  isi={hasil.deskripsi_keuangan}  warna={hasil.warna} />
-              <InfoCard icon="❤️" judul="Asmara"    isi={hasil.deskripsi_asmara}    warna={hasil.warna} />
+              <InfoCard icon="💼" judul="Karier" isi={hasil.deskripsi_karier} warna={hasil.warna} />
+              <InfoCard icon="💰" judul="Keuangan" isi={hasil.deskripsi_keuangan} warna={hasil.warna} />
+              <InfoCard icon="❤️" judul="Asmara" isi={hasil.deskripsi_asmara} warna={hasil.warna} />
               <InfoCard icon="🏥" judul="Kesehatan" isi={hasil.deskripsi_kesehatan} warna={hasil.warna} />
             </View>
           </View>
