@@ -1,5 +1,5 @@
 /**
- * Zodiac Database Queries – Drizzle ORM
+ * Zodiac Database Queries
  * Fungsi-fungsi query untuk mengakses data zodiak dari SQLite.
  */
 import { getExpoDb, zodiacImages } from './database';
@@ -38,7 +38,7 @@ export async function findZodiacByDate(bulan: number, hari: number): Promise<Zod
     }
     // Zodiak yang melewati batas bulan
     const afterStart = bulan === z.bulan_mulai && hari >= z.hari_mulai;
-    const beforeEnd  = bulan === z.bulan_selesai && hari <= z.hari_selesai;
+    const beforeEnd = bulan === z.bulan_selesai && hari <= z.hari_selesai;
     return afterStart || beforeEnd;
   });
 
