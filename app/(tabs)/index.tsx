@@ -89,6 +89,15 @@ export default function HomeScreen() {
           </ThemedText>
         </Link>
       </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Minggu 10: Zodiac Finder 🔮</ThemedText>
+        {/* @ts-ignore */}
+        <Link href={"/zodiac" as any}>
+          <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+            Buka Zodiac Finder -&gt;
+          </ThemedText>
+        </Link>
+      </ThemedView>
 
     </ParallaxScrollView>
   );
