@@ -2,27 +2,25 @@
  * Database Module – expo-sqlite + Drizzle ORM
  * Menginisialisasi database SQLite, membuat tabel, dan menyisipkan data seed zodiak.
  */
-import { openDatabaseSync, openDatabaseAsync } from 'expo-sqlite';
 import { drizzle, ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite';
-import { zodiak } from './schema';
-import { count } from 'drizzle-orm';
+import { openDatabaseAsync, openDatabaseSync } from 'expo-sqlite';
 
 // ── Image mapping ────────────────────────────────────────────────────────────
 // SQLite tidak bisa menyimpan require(), jadi kita simpan key string di DB
 // dan resolve ke asset gambar di sini.
 export const zodiacImages: Record<string, any> = {
-  aries:       require('@/assets/images/zodiac-aries.png'),
-  taurus:      require('@/assets/images/zodiac-taurus.png'),
-  gemini:      require('@/assets/images/zodiac-gemini.png'),
-  cancer:      require('@/assets/images/zodiac-cancer.png'),
-  leo:         require('@/assets/images/zodiac-leo.png'),
-  virgo:       require('@/assets/images/zodiac-virgo.png'),
-  libra:       require('@/assets/images/zodiac-libra.png'),
-  scorpio:     require('@/assets/images/zodiac-scorpio.png'),
+  aries: require('@/assets/images/zodiac-aries.png'),
+  taurus: require('@/assets/images/zodiac-taurus.png'),
+  gemini: require('@/assets/images/zodiac-gemini.png'),
+  cancer: require('@/assets/images/zodiac-cancer.png'),
+  leo: require('@/assets/images/zodiac-leo.png'),
+  virgo: require('@/assets/images/zodiac-virgo.png'),
+  libra: require('@/assets/images/zodiac-libra.png'),
+  scorpio: require('@/assets/images/zodiac-scorpio.png'),
   sagittarius: require('@/assets/images/zodiac-sagittarius.png'),
-  capricorn:   require('@/assets/images/zodiac-capricorn.png'),
-  aquarius:    require('@/assets/images/zodiac-aquarius.png'),
-  pisces:      require('@/assets/images/zodiac-pisces.png'),
+  capricorn: require('@/assets/images/zodiac-capricorn.png'),
+  aquarius: require('@/assets/images/zodiac-aquarius.png'),
+  pisces: require('@/assets/images/zodiac-pisces.png'),
 };
 
 // ── Database instance (lazy init) ───────────────────────────────────────────
