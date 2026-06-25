@@ -22,3 +22,11 @@ export const zodiak = sqliteTable('zodiak', {
   deskripsi_kesehatan: text('deskripsi_kesehatan').notNull(),
   gambar_key:          text('gambar_key').notNull(), // e.g. "aries", "taurus"
 });
+
+export const users = sqliteTable('users', {
+  id:          integer('id').primaryKey({ autoIncrement: true }),
+  username:    text('username').notNull().unique(),
+  password:    text('password').notNull(), // Hashed password
+  role:        text('role').notNull(),     // 'admin' or 'user'
+  permissions: text('permissions').notNull(), // JSON string array of allowed feature paths e.g. '["/profiles", "/hitung"]'
+});

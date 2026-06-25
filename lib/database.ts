@@ -2,9 +2,9 @@
  * Database Module – expo-sqlite + Drizzle ORM
  * Menginisialisasi database SQLite, membuat tabel, dan menyisipkan data seed zodiak.
  */
+import SHA256 from 'crypto-js/sha256';
 import { drizzle, ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite';
 import { openDatabaseAsync, openDatabaseSync } from 'expo-sqlite';
-
 // ── Image mapping ────────────────────────────────────────────────────────────
 // SQLite tidak bisa menyimpan require(), jadi kita simpan key string di DB
 // dan resolve ke asset gambar di sini.
@@ -203,27 +203,59 @@ export async function initDatabase(): Promise<void> {
       deskripsi_kesehatan TEXT NOT NULL,
       gambar_key          TEXT NOT NULL
     );
-  `);
 
-  // Cek apakah tabel sudah ada datanya menggunakan raw query async agar tidak error di Web
-  const result = await _expoDb.getFirstAsync<{ jumlah: number }>('SELECT COUNT(*) as jumlah FROM zodiak');
-  if (result && result.jumlah > 0) {
-    return; // Data sudah ada, skip seeding
-  }
+    DROP TABLE IF EXISTS users;
 
-  // Seed semua 12 zodiak menggunakan execAsync agar lebih aman di web
-  // Untuk insert satu-satu, lebih baik gunakan runAsync
-  for (const data of seedData) {
-    await _expoDb.runAsync(
-      `INSERT INTO zodiak (nama_zodiak, simbol, elemen, tanggal_mulai, tanggal_selesai, bulan_mulai, hari_mulai, bulan_selesai, hari_selesai, warna, deskripsi_karier, deskripsi_keuangan, deskripsi_asmara, deskripsi_kesehatan, gambar_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [
-        data.nama_zodiak, data.simbol, data.elemen, data.tanggal_mulai, data.tanggal_selesai,
-        data.bulan_mulai, data.hari_mulai, data.bulan_selesai, data.hari_selesai,
-        data.warna, data.deskripsi_karier, data.deskripsi_keuangan, data.deskripsi_asmara, data.deskripsi_kesehatan, data.gambar_key
-      ]
+    CREATE TABLE IF NOT EXISTS users (
+      id          INTEGER PRIMARY KEY AUTOINCREMENT,
+      username    TEXT NOT NULL UNIQUE,
+      password    TEXT NOT NULL,
+      role        TEXT NOT NULL,
+      permissions TEXT NOT NULL
     );
+  `);
+  // Cek apakah tabel sudah ada datanya menggunakan raw query async agar tidak error di Web
+  const resultZodiak = await _expoDb.getFirstAsync<{ jumlah: number }>('SELECT COUNT(*) as jumlah FROM zodiak');
+  if (!resultZodiak || resultZodiak.jumlah === 0) {
+    // Seed semua 12 zodiak
+    for (const data of seedData) {
+      await _expoDb.runAsync(
+        `INSERT INTO zodiak (nama_zodiak, simbol, elemen, tanggal_mulai, tanggal_selesai, bulan_mulai, hari_mulai, bulan_selesai, hari_selesai, warna, deskripsi_karier, deskripsi_keuangan, deskripsi_asmara, deskripsi_kesehatan, gambar_key) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          data.nama_zodiak, data.simbol, data.elemen, data.tanggal_mulai, data.tanggal_selesai,
+          data.bulan_mulai, data.hari_mulai, data.bulan_selesai, data.hari_selesai,
+          data.warna, data.deskripsi_karier, data.deskripsi_keuangan, data.deskripsi_asmara, data.deskripsi_kesehatan, data.gambar_key
+        ]
+      );
+    }
+    console.log('✅ Database zodiak berhasil di-seed dengan 12 record.');
   }
 
-  console.log('✅ Database zodiak berhasil di-seed dengan 12 record.');
+  // --- MIGRATION: Hapus tabel users lama agar di-seed ulang dengan role baru ---
+  // (Fitur Auto-Reset sudah dimatikan karena database sudah berhasil terupdate)
+  // -------------------------------------------------------------------------
+
+  // Seed Users
+  const resultUsers = await _expoDb.getFirstAsync<{ jumlah: number }>('SELECT COUNT(*) as jumlah FROM users');
+  if (!resultUsers || resultUsers.jumlah === 0) {
+    const adminPass = SHA256('admin123').toString();
+    const userPass = SHA256('user123').toString();
+
+    const usersToSeed = [
+      { username: 'admin', password: adminPass, role: 'admin', permissions: JSON.stringify(['profiles', 'hitung', 'quesioner', 'conditional', 'loop', 'sorting', 'zodiac', 'admin']) },
+      { username: 'arif', password: userPass, role: 'akademik', permissions: JSON.stringify(['profiles', 'hitung', 'quesioner', 'conditional', 'loop', 'sorting', 'zodiac']) }, // Semua kecuali admin
+      { username: 'labib', password: userPass, role: 'mahasiswa', permissions: JSON.stringify(['loop', 'sorting']) },
+      { username: 'yuri', password: userPass, role: 'mahasiswa', permissions: JSON.stringify(['loop', 'sorting']) },
+      { username: 'lisa', password: userPass, role: 'mahasiswa', permissions: JSON.stringify(['loop', 'sorting']) },
+    ];
+
+    for (const user of usersToSeed) {
+      await _expoDb.runAsync(
+        `INSERT INTO users (username, password, role, permissions) VALUES (?, ?, ?, ?)`,
+        [user.username, user.password, user.role, user.permissions]
+      );
+    }
+    console.log('✅ Database users berhasil di-seed dengan 5 record (admin, arif, labib, yuri, lisa).');
+  }
 }
 
