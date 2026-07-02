@@ -1,5 +1,5 @@
-import { Image, StyleSheet, Platform, View } from 'react-native';
 import { Link } from 'expo-router';
+import { Image, StyleSheet } from 'react-native';
 
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
@@ -144,6 +144,18 @@ export default function HomeScreen() {
           <Link href={"/admin" as any}>
             <ThemedText type="defaultSemiBold" style={{ color: '#e53935' }}>
               Buka Management User -&gt;
+            </ThemedText>
+          </Link>
+        </ThemedView>
+      )}
+
+      {hasAccess('admin') && (
+        <ThemedView style={styles.stepContainer}>
+          <ThemedText type="subtitle">Minggu 13: Dashboard</ThemedText>
+          {/* @ts-ignore */}
+          <Link href={"/dashboard" as any}>
+            <ThemedText type="defaultSemiBold" style={{ color: '#0a7ea4' }}>
+              Buka Menu Dashboard -&gt;
             </ThemedText>
           </Link>
         </ThemedView>
