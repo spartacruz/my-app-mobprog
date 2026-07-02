@@ -19,6 +19,9 @@ export default function DashboardScreen() {
     strokeWidth: 2, // optional, default 3
     barPercentage: 0.5,
     useShadowColorFromDataset: false, // optional
+    propsForLabels: {
+      fontFamily: 'Segoe UI',
+    },
   };
 
   // 1. Line Chart Data (Tren USD ke IDR)
@@ -52,6 +55,7 @@ export default function DashboardScreen() {
       color: '#3b82f6', // Blue
       legendFontColor: '#333',
       legendFontSize: 12,
+      legendFontFamily: 'Segoe UI',
     },
     {
       name: 'Adidas',
@@ -59,6 +63,7 @@ export default function DashboardScreen() {
       color: '#f59e0b', // Amber
       legendFontColor: '#333',
       legendFontSize: 12,
+      legendFontFamily: 'Segoe UI',
     },
     {
       name: 'Puma',
@@ -66,6 +71,7 @@ export default function DashboardScreen() {
       color: '#ef4444', // Red
       legendFontColor: '#333',
       legendFontSize: 12,
+      legendFontFamily: 'Segoe UI',
     },
     {
       name: 'Lainnya',
@@ -73,6 +79,7 @@ export default function DashboardScreen() {
       color: '#6b7280', // Gray
       legendFontColor: '#333',
       legendFontSize: 12,
+      legendFontFamily: 'Segoe UI',
     },
   ];
 
